@@ -7,6 +7,34 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 
+class Organ {
+
+    String  name;
+    int     register;
+
+    public Organ(String name, int register) {
+        this.name       = name;
+        this.register   = register;
+    }
+}
+
+class Person {
+
+    String  name;
+    int     age;
+    Organ   organ;
+    int     number;
+    int     priority;
+
+    public Person(String name, int age, Organ organ, int number, int priority) {
+        this.name       = name;
+        this.age        = age;
+        this.organ      = organ;
+        this.number     = number;
+        this.priority   = priority;
+    }
+}
+
 public class rodrigonascimento_201600155174_controledesenha {
 
     /**
