@@ -132,8 +132,8 @@ public class rodrigonascimento_201600155174_controledesenha {
                     organ.queue = heapifyMax(organ.queue, j, organ.queueSize);
             }
 
-            // Deletes the comma from the end of the string
-            output.deleteCharAt(output.length() - 1);
+            if (output.length() > 0)
+                output.setCharAt(output.length() - 1, '\n');
         }
 
         return output;
@@ -151,7 +151,6 @@ public class rodrigonascimento_201600155174_controledesenha {
 
         for (int i = 0; i < organs.length; i++) {
             output.append(run(organs[i]));
-            output.append("\n");
         }
 
         return output;
@@ -312,8 +311,14 @@ public class rodrigonascimento_201600155174_controledesenha {
                     organs[i].queue = heapifyMax(organs[i].queue, j, organs[i].queueSize);
             }
 
+            // Runs the Organs
             for (int i = 0; i < numOfPeople; i++) {
-                System.out.println(runAll(organs));
+
+                StringBuilder output = runAll(organs);
+                if (output != null && output.length() > 0)
+                    System.out.print(output);
+                else
+                    break;
             }
 
         } catch (Exception ex) {
