@@ -250,12 +250,8 @@ public class rodrigonascimento_201600155174_controledesenha {
      */
     private static Person[] remove(Person[] array, int lastKeyIndex) {
 
-        if (lastKeyIndex == 0) {
-            array[0] = null;
-        } else {
-            array[0] = array[lastKeyIndex];
-            array[lastKeyIndex] = null;
-        }
+        array[0] = array[lastKeyIndex];
+        array[lastKeyIndex] = null;
         
         return array;
     }
