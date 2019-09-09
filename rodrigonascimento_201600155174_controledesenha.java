@@ -95,7 +95,7 @@ public class rodrigonascimento_201600155174_controledesenha {
                 // Heapifies
                 lastRootIndex = getLastRoot(organ.queueSize);
                 for (int j = lastRootIndex; j >= 0; j--)
-                    organ.queue = heapifyMax(organ.queue, i, organ.queueSize);
+                    organ.queue = heapifyMax(organ.queue, j, organ.queueSize);
             }
         }
 
