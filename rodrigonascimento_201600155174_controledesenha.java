@@ -41,6 +41,13 @@ class Person {
 
 public class rodrigonascimento_201600155174_controledesenha {
 
+    /**
+     * Instantiates a new {@link Organ} object with the
+     * provided content.
+     * 
+     * @param line  Organ's info.
+     * @return      New {@link Organ} instance.
+     */
     public static Organ makeOrgan(String line) {
         int whitespace = line.indexOf(" ");
         String organName = line.substring(0, whitespace);
@@ -48,6 +55,14 @@ public class rodrigonascimento_201600155174_controledesenha {
         return new Organ(organName, cashiers);
     }
 
+    /**
+     * Makes a new {@link Person} object with the informations
+     * provided.
+     * 
+     * @param line      Input line containing the Person's information.
+     * @param number    Person's number in the queue.
+     * @return          New {@link Person} instance.
+     */
     public static Person makePerson(String line, int number) {
         int firstPole = line.indexOf("|");
         int secondPole = line.indexOf("|", firstPole + 1);
@@ -62,11 +77,23 @@ public class rodrigonascimento_201600155174_controledesenha {
         return new Person(name, age, organ, number, priority);
     }
 
+    /**
+     * Adds a person to an organ.
+     * 
+     * @param organ     Organ to be added to.
+     * @param person    Person to add.
+     */
     public static void addPerson(Organ organ, Person person) {
         organ.queue[organ.queueSize] = person;
         organ.queueSize++;
     }
 
+    /**
+     * Adds person to the corresponding Organ in the array.
+     * 
+     * @param organs    Avaiable organs.
+     * @param person    Person to be added.
+     */
     public static void sendPerson(Organ[] organs, Person person) {
         for (int i = 0; i < organs.length; i++) {
             if (person.organ.equals(organs[i].name)) {
@@ -76,6 +103,13 @@ public class rodrigonascimento_201600155174_controledesenha {
         }
     }
 
+    /**
+     * Removes from the organ's queue n persons corrensponding
+     * to the number of registers avaiable.
+     * 
+     * @param organ Organ to be run.
+     * @return      Organ and persons' names.
+     */
     public static StringBuilder run(Organ organ) {
 
         StringBuilder output = new StringBuilder();
@@ -98,15 +132,23 @@ public class rodrigonascimento_201600155174_controledesenha {
                     organ.queue = heapifyMax(organ.queue, j, organ.queueSize);
             }
 
+            // Deletes the comma from the end of the string
             output.deleteCharAt(output.length() - 1);
         }
 
         return output;
     }
 
+    /**
+     * Runs every organ in a array.
+     * 
+     * @param organs    Organs to be run.
+     * @return          Organs and persons' names.
+     */
     public static StringBuilder runAll(Organ[] organs) {
 
         StringBuilder output = new StringBuilder();
+
         for (int i = 0; i < organs.length; i++) {
             output.append(run(organs[i]));
             output.append("\n");
@@ -162,9 +204,10 @@ public class rodrigonascimento_201600155174_controledesenha {
     /**
      * Turns a binary tree into a max heap.
      * 
-     * @param array Tree to be heapfied.
-     * @param index Target index.
-     * @return      Heapified array.
+     * @param array     Tree to be heapfied.
+     * @param index     Target index.
+     * @param length    Total number of non null elements in the array.
+     * @return          Heapified array.
      */
     private static Person[] heapifyMax(Person[] array, int index, int length) {
 
@@ -198,6 +241,14 @@ public class rodrigonascimento_201600155174_controledesenha {
         return array;
     }
 
+    /**
+     * Replaces the node at the first position in the array
+     * with the one on the last position and sets the last to null.
+     * 
+     * @param array         Array to be used.
+     * @param lastKeyIndex  Index of the last non null node.
+     * @return              Array without the first node.
+     */
     private static Person[] remove(Person[] array, int lastKeyIndex) {
 
         if (lastKeyIndex == 0) {
@@ -244,7 +295,6 @@ public class rodrigonascimento_201600155174_controledesenha {
 
             // Reads the people
             int numOfPeople = Integer.parseInt(reader.readLine());
-            Person[] people = new Person[numOfPeople];
             for (int i = 0; i < numOfOrgans; i++)
                 organs[i].queue = new Person[numOfPeople];
 
@@ -262,23 +312,9 @@ public class rodrigonascimento_201600155174_controledesenha {
                     organs[i].queue = heapifyMax(organs[i].queue, j, organs[i].queueSize);
             }
 
-            StringBuilder output = new StringBuilder();
             for (int i = 0; i < numOfPeople; i++) {
-                output.append(runAll(organs));
+                System.out.println(runAll(organs));
             }
-
-            // Heapifies
-            /*int lastRootIndex = getLastRoot(numOfPeople);
-            for (int i = lastRootIndex; i >= 0; i--)
-                people = heapifyMax(people, i, numOfPeople);
-            
-            while(numOfPeople > 0) {
-                remove(people, --numOfPeople);
-                lastRootIndex = getLastRoot(numOfPeople);
-                for (int i = lastRootIndex; i >= 0; i--)
-                    people = heapifyMax(people, i, numOfPeople);
-            }*/
-            String o = "";
 
         } catch (Exception ex) {
             ex.printStackTrace();
